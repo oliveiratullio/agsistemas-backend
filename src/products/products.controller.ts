@@ -6,39 +6,37 @@ import {
   Param,
   Put,
   Delete,
-  ConflictException,
+  UseGuards,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('produtos')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
-  async create(@Body() createProductDto: CreateProductDto) {
-    try {
-      return await this.productsService.create(createProductDto);
-    } catch (error) {
-      if (error instanceof ConflictException) {
-        throw new ConflictException(error.message);
-      }
-      throw error;
-    }
+  @UseGuards(AuthGuard('jwt'))
+  create(@Body() createProductDto: CreateProductDto) {
+    return this.productsService.create(createProductDto);
   }
 
   @Get()
+  @UseGuards(AuthGuard('jwt'))
   findAll() {
     return this.productsService.findAll();
   }
 
   @Get(':codigo')
+  @UseGuards(AuthGuard('jwt'))
   findOne(@Param('codigo') codigo: string) {
     return this.productsService.findOne(codigo);
   }
 
   @Put(':codigo')
+  @UseGuards(AuthGuard('jwt'))
   update(
     @Param('codigo') codigo: string,
     @Body() updateProductDto: UpdateProductDto,
@@ -47,6 +45,7 @@ export class ProductsController {
   }
 
   @Delete(':codigo')
+  @UseGuards(AuthGuard('jwt'))
   remove(@Param('codigo') codigo: string) {
     return this.productsService.remove(codigo);
   }
