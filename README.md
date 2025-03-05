@@ -23,13 +23,21 @@ Docker e Docker Compose instalados.
 git clone https://github.com/oliveiratullio/agsistemas-backend.git
 cd desafio-backend
 
+#### Instale as dependências do projeto:
+
+```bash
+npm install --legacy-peer-deps
+```
 #### Gere o build do projeto:
 
+```bash
 npm run build
-
+```
 #### Execute o Docker Compose:
 
+```bash
 docker-compose up -build
+```
 
 #### Acesse a API:
 
