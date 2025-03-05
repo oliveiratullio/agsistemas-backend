@@ -1,10 +1,31 @@
-import { z } from 'zod';
+import { ApiProperty } from '@nestjs/swagger';
 
-export const UpdateProductSchema = z.object({
-  nome: z.string().optional(),
-  codigo_barras: z.string().optional(),
-  quantidade: z.number().optional(),
-  preco: z.number().optional(),
-});
+export class UpdateProductDto {
+  @ApiProperty({
+    description: 'Nome do produto',
+    example: 'Notebook Dell',
+    required: false,
+  })
+  nome?: string;
 
-export type UpdateProductDto = z.infer<typeof UpdateProductSchema>;
+  @ApiProperty({
+    description: 'Código de barras do produto',
+    example: '1234567890123',
+    required: false,
+  })
+  codigo_barras?: string;
+
+  @ApiProperty({
+    description: 'Quantidade em estoque',
+    example: 15,
+    required: false,
+  })
+  quantidade?: number;
+
+  @ApiProperty({
+    description: 'Preço do produto',
+    example: 3499.99,
+    required: false,
+  })
+  preco?: number;
+}
