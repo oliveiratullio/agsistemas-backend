@@ -20,9 +20,10 @@ Docker e Docker Compose instalados.
 ### Passos para Execução
 #### Clone o repositório:
 
+```bash
 git clone https://github.com/oliveiratullio/agsistemas-backend.git
 cd desafio-backend
-
+```
 #### Instale as dependências do projeto:
 
 ```bash
